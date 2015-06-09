@@ -7,12 +7,13 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import io.realm.mvp.example.model.User;
+import io.realm.mvp.example.presenter.MainPresenter;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainPresenter.View {
 
-    User user;
+    MainPresenter mainPresenter;
+
     TextView userInfoTextView;
     EditText fullName;
     EditText email;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        user  = new User();
+        mainPresenter = new MainPresenter(this);
 
         userInfoTextView = (TextView) findViewById(R.id.userInfo);
         fullName = (EditText) findViewById(R.id.fullName);
@@ -34,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                user.setFullName(String.valueOf(fullName.getText()));
-                updateViews();
+                mainPresenter.updateFullName(s.toString());
             }
 
             @Override
@@ -49,9 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                user.setEmail(String.valueOf(email.getText()));
-                updateViews();
-
+                mainPresenter.updateEmail(s.toString());
             }
 
             @Override
@@ -60,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateViews() {
-        userInfoTextView.setText(user.toString());
+    @Override
+    public void updateUserInfoTextView(String info) {
+        userInfoTextView.setText(info);
     }
 }
