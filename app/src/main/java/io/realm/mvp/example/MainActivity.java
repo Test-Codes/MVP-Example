@@ -12,11 +12,11 @@ import io.realm.mvp.example.presenter.MainPresenter;
 
 public class MainActivity extends AppCompatActivity implements MainPresenter.View {
 
-    MainPresenter mainPresenter;
+    private MainPresenter mainPresenter;
 
-    TextView userInfoTextView;
-    EditText fullName;
-    EditText email;
+    private TextView userInfoTextView;
+    private EditText fullName;
+    private EditText email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
