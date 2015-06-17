@@ -7,8 +7,8 @@ import io.realm.mvp.example.model.User;
  */
 public class MainPresenter {
 
-    User user;
-    View view;
+    private User user;
+    private View view;
 
     public MainPresenter(View view) {
         this.view = view;
